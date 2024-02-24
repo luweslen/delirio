@@ -1,0 +1,30 @@
+{
+  "name": "delirio",
+  "module": "src/cli.ts",
+  "version": "1.0.0",
+  "bin": {
+    "dro": "./src/cli.ts"
+  },
+  "author": {
+    "name": "Luciano Weslen",
+    "url": "https://github.com/luweslen"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "bun src/cli.ts",
+    "lint": "bunx @biomejs/biome check .",
+    "lint:fix": "bunx @biomejs/biome check --apply ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0",
+    "inquirer": "^9.2.11"
+  }
+}
