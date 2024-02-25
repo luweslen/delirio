@@ -5,5 +5,6 @@ export enum ETeam {
 	SQUAD4 = "s4",
 	DESIGNER = "designer",
 	DEVOPS = "devops",
-	QA = "qa",
+	QUALITY_ASSURANCE = "qa",
+	PRODUCT_OWNER = "po",
 }

@@ -10,5 +10,6 @@ export type TCollaborator = {
 	team: ETeam[];
 	role: ERole;
 	name: string;
+	email: string;
 	slack: TCollaboratorSlack;
 };

@@ -1,19 +1,34 @@
+import Database from "bun:sqlite";
+import chalk from "chalk";
+import { Command } from "commander";
 import { ETeam } from "../@types/team.enum";
+import { CollaboratorDatabase } from "../db/collaborator";
 import { groupByRole } from "../utils/group";
 import { shuffleTeamCollaborators } from "../utils/shuffle";
-import { getCollaboratorsByTeam } from "../utils/team";
-import { generateMarkdown, generateSlack } from "../utils/text";
+import { generateMarkdownDaily, generateSlackDaily } from "../utils/text";
 
-export const daily = (team: ETeam) => {
-	const collaborators = getCollaboratorsByTeam(team);
-	const shuffledTeam = shuffleTeamCollaborators(collaborators);
+export const DailyCommands = (program: Command, db: Database) => {
+	const daily = program.command("daily");
 
-	const groupCollaboratorByRole = groupByRole(shuffledTeam);
+	daily
+		.requiredOption("--team <team>", "Time")
+		.action(({ team }: { team: ETeam }) => {
+			const collaborators = CollaboratorDatabase.getByTeam(db, team);
 
-	const dailyOrder = Object.values(groupCollaboratorByRole).flat();
+			const shuffledTeam = shuffleTeamCollaborators(collaborators);
 
-	const textMarkdown = generateMarkdown(dailyOrder);
-	const messageSlack = generateSlack(dailyOrder);
+			const groupCollaboratorByRole = groupByRole(shuffledTeam);
 
-	return `${textMarkdown}\n\n${messageSlack}`;
+			const dailyOrder = Object.values(groupCollaboratorByRole).flat();
+
+			const textMarkdown = generateMarkdownDaily(dailyOrder);
+			console.log(chalk.bold(chalk.magenta("Markdown")));
+			console.log(textMarkdown);
+
+			console.log("");
+
+			const messageSlack = generateSlackDaily(dailyOrder);
+			console.log(chalk.bold(chalk.magenta("Mensagem Slack")));
+			console.log(messageSlack);
+		});
 };

@@ -1,19 +1,22 @@
+import Database from "bun:sqlite";
 import { Command } from "commander";
-import { ETeam } from "./@types/team.enum";
-import { daily } from "./commands/daily";
+import { CollaboratorCommands } from "./commands/collaborator";
+import { DailyCommands } from "./commands/daily";
+import { WeeklyCommands } from "./commands/weekly";
+import { prepareTables } from "./db/database";
 const program = new Command();
+
+const db = new Database("./src/db/delirio.sqlite");
+
+prepareTables(db);
 
 program
 	.name("delirio")
-	.description("CLI que gera ordem aleatória de apresentação")
+	.description("CLI para gerenciamento de times")
 	.version("1.0.0");
 
-program
-	.command("daily")
-	.description("Gerar ordem aleatória para Daily")
-	.requiredOption("--team <team-name>", "Time selecionado")
-	.action((options: { team: ETeam }) => {
-		console.log(daily(options.team));
-	});
+CollaboratorCommands(program, db);
+DailyCommands(program, db);
+WeeklyCommands(program, db);
 
 program.parse(process.argv);

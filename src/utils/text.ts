@@ -1,6 +1,6 @@
 import { TCollaborator } from "../@types/collaborator.type";
 
-export const generateMarkdown = (collaborators: TCollaborator[]) => {
+export const generateMarkdownDaily = (collaborators: TCollaborator[]) => {
 	const text = collaborators
 		.map(
 			(collaborator) =>
@@ -9,12 +9,46 @@ export const generateMarkdown = (collaborators: TCollaborator[]) => {
 				})`,
 		)
 		.join("\n");
-	return `MARKDOWN\n${text}`;
+	return `${text}`;
 };
 
-export const generateSlack = (collaborators: TCollaborator[]) => {
+export const generateSlackDaily = (collaborators: TCollaborator[]) => {
 	const text = collaborators
 		.map((collaborator) => `- @${collaborator.slack.name}`)
 		.join("\n");
-	return `SLACK\nBora daily?\n${text}`;
+	return `Bora daily?\n${text}`;
+};
+
+export const generateMarkdownWeekly = (
+	data: {
+		name: string;
+		collaborators: TCollaborator[];
+	}[],
+) => {
+	const text = data
+		.map(
+			(item) =>
+				`- [ ] ${item.name} [${item.collaborators
+					.map((i) => `@${i.slack.name}`)
+					.join(", ")}]`,
+		)
+		.join("\n");
+	return text;
+};
+
+export const generateSlackWeekly = (
+	data: {
+		name: string;
+		collaborators: TCollaborator[];
+	}[],
+) => {
+	const text = data
+		.map(
+			(item) =>
+				`- ${item.name} [${item.collaborators
+					.map((i) => `@${i.slack.name}`)
+					.join(", ")}]`,
+		)
+		.join("\n");
+	return text;
 };
