@@ -1,0 +1,28 @@
+[
+  {
+    "team": [
+      "s1"
+    ],
+    "role": "dev",
+    "email": "exemplo.um@empresa.com.br",
+    "name": "Exemplo Um",
+    "slack": {
+      "name": "Exemplo Um",
+      "link": "https://slack.com/team/ExemploUm"
+    }
+  },
+  {
+    "team": [
+      "s1",
+      "s2",
+      "po"
+    ],
+    "role": "po",
+    "email": "exemplo.dois@empresa.com.br",
+    "name": "Exemplo Dois",
+    "slack": {
+      "name": "Exemplo Dois",
+      "link": "https://slack.com/team/ExemploDois"
+    }
+  }
+]

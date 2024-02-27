@@ -1,15 +1,60 @@
-# delirio
+# Delirio CLI
 
-To install dependencies:
+## Instalar Dependências
 
 ```bash
 bun install
 ```
 
-To run:
+## Comandos
 
+### Colaborador
+
+#### Criar colaborador
+
+Comando:
 ```bash
-bun run dev
+bun dev collaborator create
 ```
 
-This project was created using `bun init` in bun v1.0.29. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Resposta:
+```bash                                     
+$ bun src/cli.ts collaborator create
+? Qual é o nome do colaborador? Exemplo
+? Qual é o papel do colaborador? Desenvolvedor
+? Qual time está participando? Squad 1, Squad 4
+? Qual é o username no slack do colaborador? exemplo
+? Qual é o link do slack do colaborador? http://slack.com/exemplo
+Colaborador criado com sucesso
+```
+
+#### Criar múltiplos colaboradores
+
+Comando:
+```bash
+bun dev collaborator create-bulk --path ./tmp/collaborators.example.json
+```
+
+Opções:
+Flag | Descrição 
+:--------- | :------:
+--path | Caminho do arquivo JSON
+
+### Daily
+
+Comando:
+```bash
+bun dev collaborator daily --team s3
+```
+
+Opções:
+Flag | Descrição 
+:--------- | :------:
+--team | Time selecionado
+
+### Weekly
+
+Comando:
+```bash
+bun dev collaborator weekly 
+```
